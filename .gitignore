@@ -81,3 +81,5 @@ typings/
 
 package-lock.json
 contest.db
+forms/*
+!forms/sample.yml

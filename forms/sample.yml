@@ -1,0 +1,7 @@
+title: Sample Form
+admins:
+  - admin
+fields:
+  - name: email
+    server: true
+  - name: first_name

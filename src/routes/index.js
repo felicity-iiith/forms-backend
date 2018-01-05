@@ -2,9 +2,10 @@ import compose from "koa-compose";
 
 import main from "./main";
 import user from "./user";
+import form from "./form";
 import generateApiDocs from "./swagger";
 
-const routers = [main, user];
+const routers = [main, user, form];
 
 if (process.env.NODE_ENV != "production") {
   const docsRouter = generateApiDocs(routers);
