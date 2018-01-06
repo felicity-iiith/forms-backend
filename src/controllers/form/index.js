@@ -4,10 +4,13 @@ import validateResponse from "./validateResponse";
 
 export async function get(ctx) {
   const { formslug } = ctx.params;
+  const { user } = ctx.state;
   const form = await getForm(formslug);
   if (form) {
     ctx.body = form;
-    ctx.body.response = await getResponse(formslug, ctx.state.user);
+    ctx.body.response = await getResponse(formslug, user);
+    ctx.body.isAdmin = form.admins.indexOf(user.username) != -1;
+    ctx.body.admins = undefined;
   } else ctx.status = 404;
 }
 
