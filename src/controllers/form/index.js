@@ -1,17 +1,11 @@
 import Response from "../../models/Response";
-import getForm from "./getForm";
 import validateResponse from "./validateResponse";
 
 export async function get(ctx) {
   const { formslug } = ctx.params;
-  const { user } = ctx.state;
-  const form = await getForm(formslug);
-  if (form) {
-    ctx.body = form;
-    ctx.body.response = await getResponse(formslug, user);
-    ctx.body.isAdmin = form.admins.indexOf(user.username) != -1;
-    ctx.body.admins = undefined;
-  } else ctx.status = 404;
+  const { user, form } = ctx.state;
+  ctx.body = form;
+  ctx.body.response = await getResponse(formslug, user);
 }
 
 async function getResponse(formslug, user) {
@@ -30,11 +24,7 @@ async function getResponse(formslug, user) {
 
 export async function postResponse(ctx) {
   const { formslug } = ctx.params;
-  const form = await getForm(formslug);
-  if (!form) {
-    ctx.status = 404;
-    return;
-  }
+  const { user, form } = ctx.state;
   try {
     let { response } = ctx.request.body;
     response = JSON.parse(response);
@@ -47,7 +37,7 @@ export async function postResponse(ctx) {
     const responseInDb = await Response.create({
       response,
       formslug,
-      userUsername: ctx.state.user.username
+      userUsername: user.username
     });
     ctx.body = { success: true, response: responseInDb };
   } catch (e) {

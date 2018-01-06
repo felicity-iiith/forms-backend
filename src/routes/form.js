@@ -1,6 +1,7 @@
 import koaRouter from "koa-joi-router";
 
 import * as ctrl from "../controllers/form";
+import retrieveForm from "../middleware/retrieveForm";
 
 const Joi = koaRouter.Joi;
 const router = koaRouter();
@@ -10,7 +11,7 @@ const routes = [
   {
     method: "get",
     path: "/:formslug",
-    handler: [ctrl.get],
+    handler: [retrieveForm, ctrl.get],
     validate: {
       params: {
         formslug: Joi.string().token()
@@ -26,7 +27,7 @@ const routes = [
   {
     method: "post",
     path: "/:formslug/response",
-    handler: [ctrl.postResponse],
+    handler: [retrieveForm, ctrl.postResponse],
     validate: {
       params: {
         formslug: Joi.string().token()
