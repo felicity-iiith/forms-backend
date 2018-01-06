@@ -23,6 +23,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-node8": "^1.2.0",
     "convict": "^4.0.2",
+    "joi": "^13.1.0",
     "js-yaml": "^3.10.0",
     "koa": "^2.3.0",
     "koa-compose": "^4.0.0",
