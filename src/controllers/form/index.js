@@ -9,17 +9,13 @@ export async function get(ctx) {
 }
 
 async function getResponse(formslug, user) {
-  try {
-    const response = await Response.findOne({
-      where: {
-        formslug,
-        userUsername: user.username
-      }
-    });
-    return response;
-  } catch (e) {
-    return false;
-  }
+  const response = await Response.findOne({
+    where: {
+      formslug,
+      userUsername: user.username
+    }
+  });
+  return response;
 }
 
 export async function postResponse(ctx) {
