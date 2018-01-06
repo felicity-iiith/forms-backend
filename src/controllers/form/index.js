@@ -40,3 +40,19 @@ export async function postResponse(ctx) {
     ctx.status = 400;
   }
 }
+
+export async function getResponses(ctx) {
+  const { formslug } = ctx.params;
+  const { form } = ctx.state;
+  if (!form.isAdmin) {
+    ctx.status = 403;
+    return;
+  } else {
+    const responses = await Response.findAll({
+      where: {
+        formslug
+      }
+    });
+    ctx.body = responses;
+  }
+}

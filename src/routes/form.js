@@ -43,6 +43,22 @@ const routes = [
         tags: ["forms"]
       }
     }
+  },
+  {
+    method: "get",
+    path: "/:formslug/responses",
+    handler: [retrieveForm, ctrl.getResponses],
+    validate: {
+      params: {
+        formslug: Joi.string().token()
+      }
+    },
+    meta: {
+      swagger: {
+        summary: "Get Form responses (if admin)",
+        tags: ["forms"]
+      }
+    }
   }
 ];
 
