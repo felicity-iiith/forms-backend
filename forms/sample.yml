@@ -1,6 +1,8 @@
 title: Sample Form
 admins:
   - admin
+# Add the following to enable multiple responses per user
+# multipleResponses: true
 fields:
   - name: email
     server: true

@@ -30,6 +30,11 @@ export async function postResponse(ctx) {
       ctx.status = 400;
       return;
     }
+    if (!form.multipleResponses && (await getResponse(formslug, user))) {
+      ctx.body = { success: false, errors: { _meta: "Form already filled" } };
+      ctx.status = 403;
+      return;
+    }
     const responseInDb = await Response.create({
       response,
       formslug,
