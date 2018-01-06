@@ -1,0 +1,7 @@
+# Need to make a duplicate of this file called config.yml
+
+default: # Name of account
+  apiKey: test_a94c2236c214a7eeb72cd482016
+  authToken: test_db7f50ccb428e67bd50e5b40ea1
+  salt: 2fe821094d7a45aa91337a1ba9506438
+  instamojoUrl: https://test.instamojo.com/api/1.1

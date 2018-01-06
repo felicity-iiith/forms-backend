@@ -22,6 +22,26 @@ const routes = [
         tags: ["forms"]
       }
     }
+  },
+  {
+    method: "post",
+    path: "/:formslug/response",
+    handler: [ctrl.postResponse],
+    validate: {
+      params: {
+        formslug: Joi.string().token()
+      },
+      type: "form",
+      body: {
+        response: Joi.string()
+      }
+    },
+    meta: {
+      swagger: {
+        summary: "Post form response",
+        tags: ["forms"]
+      }
+    }
   }
 ];
 
