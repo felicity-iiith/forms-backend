@@ -7,3 +7,6 @@ fields:
   - name: email
     server: true
   - name: first_name
+    userinfo_attr: given_name
+  - name: family_name
+    label: Last Name # alternate method to autofill
