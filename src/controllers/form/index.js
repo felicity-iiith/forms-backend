@@ -20,7 +20,7 @@ async function getResponse(formslug, user) {
 
 export async function postResponse(ctx) {
   const { formslug } = ctx.params;
-  const { user, form } = ctx.state;
+  const { user, userinfo, form } = ctx.state;
   if (!form.multipleResponses && (await getResponse(formslug, user))) {
     ctx.body = { success: false, errors: { _meta: "Form already filled" } };
     ctx.status = 403;
@@ -29,6 +29,10 @@ export async function postResponse(ctx) {
   try {
     let { response } = ctx.request.body;
     response = JSON.parse(response);
+    form.fields.forEach(field => {
+      if (!field.server) return;
+      response[field.name] = userinfo[field.userinfo_attr || field.name];
+    });
     const errors = validateResponse(form, response);
     if (errors) {
       ctx.body = { success: false, errors };
