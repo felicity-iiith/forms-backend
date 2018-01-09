@@ -10,3 +10,5 @@ fields:
     userinfo_attr: given_name
   - name: family_name
     label: Last Name # alternate method to autofill
+  - name: link
+    validation: "string:uri" # see https://www.npmjs.com/package/joi-json

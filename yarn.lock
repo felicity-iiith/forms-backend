@@ -1788,6 +1788,12 @@ jest-validate@^21.1.0:
     leven "^2.1.0"
     pretty-format "^21.2.1"
 
+joi-json@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/joi-json/-/joi-json-2.0.1.tgz#b849d7c55648ef9d2b8e0a8313ccf7296fa42eda"
+  dependencies:
+    vandium-utils "^1.1.0"
+
 joi@10.2.2:
   version "10.2.2"
   resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.2.tgz#dc5a792b7b4c6fffa562242a95b55d9d3f077e24"
@@ -3269,6 +3275,10 @@ validator@7.2.0:
 validator@^9.1.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-9.2.0.tgz#ad216eed5f37cac31a6fe00ceab1f6b88bded03e"
+
+vandium-utils@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vandium-utils/-/vandium-utils-1.2.0.tgz#44735de4b7641a05de59ebe945f174e582db4f59"
 
 varify@0.2.0:
   version "0.2.0"

@@ -1,5 +1,9 @@
 import Joi from "joi";
+import { builder as joiJSON } from "joi-json";
 import { capitalize } from "../../utilities";
+
+const joiJSONBuilder = joiJSON();
+const parseJoiValidation = val => joiJSONBuilder.build(val);
 
 function typeSchema(field) {
   const type = field.type || "string";
@@ -20,7 +24,9 @@ function typeSchema(field) {
 function formSchema(fields) {
   let schema = {};
   fields.forEach(field => {
-    let sc = typeSchema(field);
+    let sc = field.validation
+      ? parseJoiValidation(field.validation)
+      : typeSchema(field);
     sc = sc.label(field.label || capitalize(field.name));
     if (!field.optional) sc = sc.required();
     schema[field.name] = sc;
