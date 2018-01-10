@@ -7,6 +7,7 @@ import { dbconnect } from "./models/db";
 import setupModels from "./models/setupModels";
 
 import authMiddleware from "./middleware/auth";
+import "./helpers/payment";
 
 async function setup() {
   await dbconnect();

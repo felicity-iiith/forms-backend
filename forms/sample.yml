@@ -12,3 +12,18 @@ fields:
     label: Last Name # alternate method to autofill
   - name: link
     validation: "string:uri" # see https://www.npmjs.com/package/joi-json
+
+# Payment example
+# title: Payment Sample Form
+# admins:
+#   - admin
+# # Add the following to enable multiple responses per user
+# # multipleResponses: true
+# fields: # All of these fields are mandatory for payment form
+#   - name: email
+#     server: true
+#   - name: name
+#   - name: mobile
+# payment:
+#   account: default
+#   amount: 9

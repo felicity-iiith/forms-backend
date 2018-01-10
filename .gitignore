@@ -83,3 +83,4 @@ package-lock.json
 contest.db
 forms/*
 !forms/sample.yml
+src/config/payment/config.yml

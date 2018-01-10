@@ -1,0 +1,11 @@
+# Need to make a duplicate of this file called config.yml
+
+default: # Name of account
+  apiKey: apiKey
+  authToken: authToken
+  salt: salt
+  instamojoUrl: https://test.instamojo.com/api/1.1 # optional
+account2: # account2
+  apiKey: apiKey2
+  authToken: authToken2
+  salt: salt2

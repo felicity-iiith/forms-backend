@@ -25,6 +25,22 @@ const routes = [
     }
   },
   {
+    method: "get",
+    path: "/:formslug/initiatePayment",
+    handler: [retrieveForm, ctrl.initiatePayment],
+    validate: {
+      params: {
+        formslug: Joi.string().token()
+      }
+    },
+    meta: {
+      swagger: {
+        summary: "Get Form",
+        tags: ["forms"]
+      }
+    }
+  },
+  {
     method: "post",
     path: "/:formslug/response",
     handler: [retrieveForm, ctrl.postResponse],

@@ -1,5 +1,6 @@
 import Response from "../../models/Response";
 import validateResponse from "./validateResponse";
+import { getPaymentLink } from "../../helpers/payment";
 
 export async function get(ctx) {
   const { formslug } = ctx.params;
@@ -64,4 +65,33 @@ export async function getResponses(ctx) {
     });
     ctx.body = responses;
   }
+}
+
+export async function initiatePayment(ctx) {
+  const { formslug } = ctx.params;
+  const { form, user } = ctx.state;
+  const response = await Response.findOne({
+    where: {
+      formslug,
+      userUsername: user.username
+    }
+  });
+  if (!response || !form.payment) {
+    ctx.status = 400;
+    return;
+  }
+  const payment = await getPaymentLink({
+    account: form.payment.account,
+    purpose: `${form.title} | Felicity`,
+    amount: form.payment.amount,
+    email: response.response.email,
+    phone: response.response.mobile,
+    name: response.response.name
+  });
+  if (!payment) {
+    ctx.status = 500;
+    return;
+  }
+  response.update({ payment_request_id: payment.payment_request_id });
+  ctx.redirect(payment.longurl);
 }
