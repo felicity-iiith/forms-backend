@@ -2,6 +2,7 @@ import rp from "request-promise-native";
 import paymentcfg from "../config/payment";
 import { verifyHMAC } from "../helpers/payment";
 import Response from "../models/Response";
+import PaymentDump from "../models/PaymentDump";
 
 export async function done(ctx) {
   const { payment_id, payment_request_id } = ctx.request.query;
@@ -26,7 +27,9 @@ export async function done(ctx) {
 export async function webhook(ctx) {
   const { account } = ctx.params;
   const { body } = ctx.request;
-  if (!verifyHMAC(account, body)) {
+  const hmacCheck = verifyHMAC(account, body);
+  await PaymentDump.create({ account, body, hmacCheck });
+  if (!hmacCheck) {
     ctx.status = 400;
     return;
   }
