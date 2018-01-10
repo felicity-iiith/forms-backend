@@ -7,6 +7,7 @@ const Response = db.define("response", {
   formslug: Sequelize.STRING,
   response: Sequelize.JSON,
   payment_request_id: {
+    // form: account|payment_request_id
     type: Sequelize.STRING,
     unique: true,
     allowNull: true,

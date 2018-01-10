@@ -92,6 +92,8 @@ export async function initiatePayment(ctx) {
     ctx.status = 500;
     return;
   }
-  response.update({ payment_request_id: payment.payment_request_id });
+  response.update({
+    payment_request_id: `${form.payment.account}|${payment.payment_request_id}`
+  });
   ctx.redirect(payment.longurl);
 }

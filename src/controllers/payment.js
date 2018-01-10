@@ -15,7 +15,9 @@ export async function done(ctx) {
     { headers, json: true }
   );
   const status = res.payment.status === "Credit";
-  const response = await Response.findOne({ where: { payment_request_id } });
+  const response = await Response.findOne({
+    where: { payment_request_id: `${account}|${payment_request_id}` }
+  });
   if (!response) return;
   if (status) await response.update({ payment_status: true });
   ctx.redirect(`${config.get("publicFrontendUrl")}/${response.formslug}`);
@@ -30,7 +32,7 @@ export async function webhook(ctx) {
   }
   const status = body.status === "Credit";
   const response = await Response.findOne({
-    where: { payment_request_id: body.payment_request_id }
+    where: { payment_request_id: `${account}|${body.payment_request_id}` }
   });
   if (!response) return;
   if (status) await response.update({ payment_status: true });
