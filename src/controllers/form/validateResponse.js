@@ -18,6 +18,10 @@ function typeSchema(field) {
   switch (type) {
     case "string":
       return Joi.string().max(256);
+    case "select":
+      return Joi.number()
+        .min(1)
+        .max(field.data.options.length);
   }
 }
 

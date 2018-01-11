@@ -14,6 +14,12 @@ fields:
     label: Last Name # alternate method to autofill
   - name: link
     validation: "string:uri" # see https://www.npmjs.com/package/joi-json
+  # - name: team_size
+  #   type: select
+  #   data:
+  #     # Entries are stored as index of option + 1. For ex, 1 in DB represents
+  #     # 3 and 2 in DB represents 1
+  #     options: [3, 1, 2]
 
 # Payment example
 # title: Payment Sample Form
