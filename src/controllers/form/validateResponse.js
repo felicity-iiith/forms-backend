@@ -1,11 +1,12 @@
 import Joi from "joi";
 import { builder as joiJSON } from "joi-json";
 import { capitalize } from "../../utilities";
+import validateTeam from "./validateTeam";
 
 const joiJSONBuilder = joiJSON();
 const parseJoiValidation = val => joiJSONBuilder.build(val);
 
-function typeSchema(field) {
+function typeSchema(field, value) {
   const type = field.type || "string";
   // Special fields
   switch (field.name) {
@@ -21,15 +22,17 @@ function typeSchema(field) {
     case "select":
       if (field.data.other) return Joi.string().max(256);
       return Joi.string().valid(field.data.options);
+    case "team":
+      return validateTeam(field, value);
   }
 }
 
-function formSchema(fields) {
+function formSchema(fields, response) {
   let schema = {};
   fields.forEach(field => {
     let sc = field.validation
       ? parseJoiValidation(field.validation)
-      : typeSchema(field);
+      : typeSchema(field, response[field.name]);
     sc = sc.label(field.label || capitalize(field.name));
     if (!field.optional) sc = sc.required();
     schema[field.name] = sc;
@@ -38,7 +41,7 @@ function formSchema(fields) {
 }
 
 export default function validateResponse(form, response) {
-  const schema = formSchema(form.fields);
+  const schema = formSchema(form.fields, response);
   let error = Joi.validate(response, schema, { abortEarly: false }).error;
   let errors = null;
   if (error) {
