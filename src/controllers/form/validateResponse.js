@@ -19,9 +19,8 @@ function typeSchema(field) {
     case "string":
       return Joi.string().max(256);
     case "select":
-      return Joi.number()
-        .min(1)
-        .max(field.data.options.length);
+      if (field.data.other) return Joi.string().max(256);
+      return Joi.string().valid(field.data.options);
   }
 }
 
