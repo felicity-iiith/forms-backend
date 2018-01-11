@@ -23,6 +23,7 @@
     "babel-core": "^6.26.0",
     "babel-preset-node8": "^1.2.0",
     "convict": "^4.0.2",
+    "ellipsize": "^0.0.3",
     "joi": "^13.1.0",
     "joi-json": "^2.0.1",
     "js-yaml": "^3.10.0",

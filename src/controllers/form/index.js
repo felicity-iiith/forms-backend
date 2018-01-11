@@ -1,3 +1,4 @@
+import ellipsize from "ellipsize";
 import Response from "../../models/Response";
 import validateResponse from "./validateResponse";
 import { getPaymentLink } from "../../helpers/payment";
@@ -92,7 +93,7 @@ export async function initiatePayment(ctx) {
   }
   const payment = await getPaymentLink({
     account: form.payment.account,
-    purpose: `${form.title} | Felicity`,
+    purpose: `${ellipsize(form.title, 19)} | Felicity`,
     amount: form.payment.amount,
     email: response.response.email,
     phone: response.response.mobile,
