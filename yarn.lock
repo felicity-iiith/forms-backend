@@ -2971,6 +2971,10 @@ seq-queue@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/seq-queue/-/seq-queue-0.0.5.tgz#d56812e1c017a6e4e7c3e3a37a1da6d78dd3c93e"
 
+sequelize-json@meghprkh/sequelize-json:
+  version "2.1.2"
+  resolved "https://codeload.github.com/meghprkh/sequelize-json/tar.gz/2ae488c2e1b8cc13478df0fe20016153c85635b1"
+
 sequelize@^4.28.1:
   version "4.28.1"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.28.1.tgz#1ca05adcb413309219583a1895070d48c3366b3d"
