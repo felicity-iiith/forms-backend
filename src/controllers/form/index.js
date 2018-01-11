@@ -22,6 +22,11 @@ async function getResponse(formslug, user) {
 export async function postResponse(ctx) {
   const { formslug } = ctx.params;
   const { user, userinfo, form } = ctx.state;
+  if (form.seats && form.seats_left == 0) {
+    ctx.body = { success: false, errors: { _meta: "All seats booked" } };
+    ctx.status = 403;
+    return;
+  }
   if (!form.multipleResponses && (await getResponse(formslug, user))) {
     ctx.body = { success: false, errors: { _meta: "Form already filled" } };
     ctx.status = 403;
@@ -76,6 +81,11 @@ export async function initiatePayment(ctx) {
       userUsername: user.username
     }
   });
+  if (form.seats && form.seats_left == 0) {
+    ctx.body = { success: false, errors: { _meta: "All seats booked" } };
+    ctx.status = 403;
+    return;
+  }
   if (!response || !form.payment) {
     ctx.status = 400;
     return;

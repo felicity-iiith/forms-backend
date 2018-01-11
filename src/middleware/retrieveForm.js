@@ -2,6 +2,7 @@ import yaml from "js-yaml";
 import fs from "fs";
 import path from "path";
 import { promisify } from "util";
+import Response from "../models/Response";
 
 const readFile = promisify(fs.readFile);
 
@@ -27,6 +28,18 @@ export default async function retrieveForm(ctx, next) {
     // Hide properties here
     form.isAdmin = form.admins.indexOf(user.username) != -1;
     form.admins = undefined;
+    if (form.seats) {
+      let seats_filled;
+      if (!form.payment)
+        seats_filled = await Response.count({ where: { formslug } });
+      else
+        seats_filled = await Response.count({
+          where: { formslug, payment_status: true }
+        });
+      form.seats_left = form.seats - seats_filled;
+      // Hack (might be needed coz no locking of seats)
+      form.seats_left = form.seats_left < 0 ? 0 : form.seats_left;
+    }
     ctx.state.form = form;
     return next();
   }

@@ -3,6 +3,8 @@ admins:
   - admin
 # Add the following to enable multiple responses per user
 # multipleResponses: true
+# Add the following if you have limited seats
+# seats: 100
 fields:
   - name: email
     server: true
